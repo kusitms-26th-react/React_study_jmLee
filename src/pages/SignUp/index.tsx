@@ -1,48 +1,81 @@
 
 import React from 'react'
 import { useState, useCallback } from 'react'
+import axios from 'axios'
 import useInput from '@hooks/useInput';
+import { Input, Form, Button, Title } from '@SignUp/styles'
 
+
+// 회원가입 틀을 짠다.
+// axios를 달아준다
+// validation처리해주기 
 const Signup = () => {
 
     const [name, onChangeName, setName] = useInput('');
     const [email, onChangeEmail, setEmail] = useInput('');
     const [phoneNum, onChangePhoneNum, setPhoneNum] = useInput('');
+    const [password, onChangePassword, setPassword] = useInput('');
 
-    const onSubmit = () => {
 
-    }
+    const onSubmit = useCallback(
+        (e: any) => {
+            e.preventDefault();
+            axios.post('http://localhost:8080/booklog/member', {
+                name: name,
+                email: email,
+                phoneNum: phoneNum,
+                password: password
+            })
+                .then((response) => {
+                    console.log(response)
+
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                })
+
+        }, [name, email, phoneNum, password]
+    );
+
 
 
 
 
 
     return (
-        <div>
-            <h1>Signup</h1>
-            <form onSubmit={onSubmit}>
-                <input type='text'
+        <div id="signUpContainer">
+            <Title>Book;Log</Title>
+            <br></br>
+            <Form onSubmit={onSubmit}>
+                <Input type='text'
                     placeholder='name'
                     value={name}
                     onChange={onChangeName}
 
                 />
-                <br />
-                <input type='email'
+
+                <Input type='email'
                     placeholder='email'
                     value={email}
                     onChange={onChangeEmail}
 
                 />
-                <br />
-                <input type='tel'
+
+                <Input type='tel'
                     placeholder='phoneNumber'
                     value={phoneNum}
                     onChange={onChangePhoneNum}
                 />
-                <br />
-                <button type="submit">submit</button>
-            </form>
+
+                <Input type='password'
+                    placeholder='password'
+                    value={password}
+                    onChange={onChangePassword}
+
+                />
+
+                <Button type="submit">SignUp</Button>
+            </Form>
         </div >
     );
 }

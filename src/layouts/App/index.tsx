@@ -7,9 +7,9 @@ import Home from '@Home/index';
 const App = () => {
     return (
         <Routes>
-            <Route path="/" element={<LogIn />} />
+            <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
 
         </Routes >
     );

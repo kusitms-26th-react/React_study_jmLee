@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { useState, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import useInput from '@hooks/useInput';
 import { Input, Form, Button, Title } from '@SignUp/styles'
@@ -10,6 +11,7 @@ import { Input, Form, Button, Title } from '@SignUp/styles'
 // axios를 달아준다
 // validation처리해주기 
 const Signup = () => {
+    const navigate = useNavigate();
 
     const [name, onChangeName, setName] = useInput('');
     const [email, onChangeEmail, setEmail] = useInput('');
@@ -17,6 +19,11 @@ const Signup = () => {
     const [password, onChangePassword, setPassword] = useInput('');
 
 
+
+    const goToHome = () => {
+        navigate('/');
+
+    }
     const onSubmit = useCallback(
         (e: any) => {
             e.preventDefault();
@@ -27,7 +34,10 @@ const Signup = () => {
                 password: password
             })
                 .then((response) => {
+                    goToHome();
                     console.log(response)
+
+
 
                 })
                 .catch((error) => {
@@ -44,7 +54,7 @@ const Signup = () => {
 
     return (
         <div id="signUpContainer">
-            <Title>Book;Log</Title>
+            <Title>Sign Up</Title>
             <br></br>
             <Form onSubmit={onSubmit}>
                 <Input type='text'
@@ -76,6 +86,9 @@ const Signup = () => {
 
                 <Button type="submit">SignUp</Button>
             </Form>
+
+
+
         </div >
     );
 }

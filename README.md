@@ -12,7 +12,7 @@
 브런치 사이트에서 영감을 받아 책을 읽고 느낀점들을 기록하는 일종의 독서일지!
 (내가 쓰고 싶어서 만들었다..!)
 
-우당탕탕 백엔드가 궁금하다면? : https://github.com/JjungminLee/Kusitms_React_Back
+우당탕탕 백엔드가 궁금하다면? : https://github.com/JjungminLee/Kusitms_React_Back 
 
 ## 💥 개발일지
 

@@ -1,13 +1,16 @@
 import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom'
-import { Title, Form, Input, Button, SignUp, NUllButton } from '@LogIn/style'
 
+import { Title, Form, Input, Button, SignUp, NUllButton } from '@LogIn/style'
+import useSWR from 'swr';
 import useInput from '@hooks/useInput';
 import axios from 'axios';
+import fetcher from '@utils/fetcher';
 const LogIn = () => {
 
     const navigate = useNavigate();
+
+    //const { data, error, revalidate, mutate } = useSWR('/home', fetcher)
 
     const [email, onChangeEmail, setEmail] = useInput('');
     const [password, onChangePassword, setPassword] = useInput('');
@@ -15,13 +18,17 @@ const LogIn = () => {
     const onSubmit = useCallback(
 
         (e: any) => {
+            e.preventDefault();
             axios.post('http://localhost:8080/booklog/member/log-in', {
                 email: email,
                 password: password
+            }, {
+                withCredentials: true,
             })
                 .then((response) => {
-                    console.log(response.data);
                     goToHome();
+                    console.log(response.data);// 이 repsonse.data가 swr의 data가 됨
+
 
                 })
                 .catch((error) => {
@@ -33,7 +40,7 @@ const LogIn = () => {
     );
 
     const goToSignUp = () => {
-        navigate("/signup")
+        navigate("http://localhost:3000/signup")
 
 
     }

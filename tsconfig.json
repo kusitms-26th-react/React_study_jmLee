@@ -7,7 +7,8 @@
       "@SignUp/*":["src/pages/SignUp/*"],
       "@LogIn/*":["src/pages/LogIn/*"],
       "@Home/*":["src/pages/Home/*"],
-      "@hooks/*":["src/hooks/*"]
+      "@hooks/*":["src/hooks/*"],
+      "@utils/*":["src/utils/*"]
     },
     
     "target": "es5",

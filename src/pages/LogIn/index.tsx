@@ -40,7 +40,7 @@ const LogIn = () => {
     );
 
     const goToSignUp = () => {
-        navigate("http://localhost:3000/signup")
+        navigate("/signup")
 
 
     }

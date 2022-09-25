@@ -8,7 +8,9 @@
           "@LogIn/*":["src/pages/LogIn/*"],
           "@Home/*":["src/pages/Home/*"],
           "@hooks/*":["src/hooks/*"],
-          "@utils/*":["src/utils/*"]
+          "@utils/*":["src/utils/*"],
+          "@media/*":["src/media/*"],
+          "@img/*":["src/media/img/*"]
         }
     }
   }

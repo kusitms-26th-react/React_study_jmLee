@@ -1,5 +1,13 @@
 import styled from 'styled-components'
 
+export const Logo = styled.button`
+background-color:transparent;
+border:0;
+outline:0;
+
+
+`
+
 export const Title = styled.h1`
   text-align:center;
   font-family: "Perpetua Titling MT", serif;

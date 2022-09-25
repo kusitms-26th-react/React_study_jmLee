@@ -1,4 +1,5 @@
-
+import { useLocation, useNavigate } from "react-router";
+import { useEffect, useState } from 'react'
 import {
     EditorPic, RecommendArticle, RecommendTitle, RecommendDesc, RecommendWrapSlide
     , ListSlide, RecommendListSlideLi, RecommendArticleSubject, RecommendArticleDesc, EditorPicWrapSlide, EditorPicTitle
@@ -8,10 +9,19 @@ import {
 import logo1 from "@img/logo1.png"
 
 const Home = () => {
+    const [login, setLogin] = useState('');
+    const navigate = useNavigate();
+
+    const location = useLocation();
+    const name = location.state.name;
+
+
+
 
     return (
         <div id='HomeContainer' style={{ overflowX: 'hidden' }}>
             <img src={logo1} />
+
             <EditorPic>
                 <EditorPicTitle>Now update</EditorPicTitle>
                 <br />

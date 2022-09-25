@@ -4,8 +4,8 @@ import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import useInput from '@hooks/useInput';
-import { Input, Form, Button, Title } from '@SignUp/styles'
-
+import { Logo, Input, Form, Button, Title } from '@SignUp/styles'
+import logo1 from "@img/logo1.png"
 
 // 회원가입 틀을 짠다.
 // axios를 달아준다
@@ -27,7 +27,7 @@ const Signup = () => {
     const onSubmit = useCallback(
         (e: any) => {
             e.preventDefault();
-            axios.post('http://localhost:8080/booklog/member', {
+            axios.post('http://localhost:8080/user', {
                 name: name,
                 email: email,
                 phoneNum: phoneNum,
@@ -54,6 +54,9 @@ const Signup = () => {
 
     return (
         <div id="signUpContainer">
+            <Logo onClick={goToHome}>
+                <img src={logo1} />
+            </Logo>
             <Title>Sign Up</Title>
             <br></br>
             <Form onSubmit={onSubmit}>

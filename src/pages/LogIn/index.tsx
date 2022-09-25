@@ -6,7 +6,12 @@ import useSWR from 'swr';
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import fetcher from '@utils/fetcher';
+import { setCookie } from '@/utils/cookie';
+
+axios.defaults.withCredentials = true;
 const LogIn = () => {
+
+
 
     const navigate = useNavigate();
 
@@ -15,24 +20,31 @@ const LogIn = () => {
     const [email, onChangeEmail, setEmail] = useInput('');
     const [password, onChangePassword, setPassword] = useInput('');
 
+
     const onSubmit = useCallback(
 
         (e: any) => {
             e.preventDefault();
-            axios.post('http://localhost:8080/booklog/member/log-in', {
-                email: email,
-                password: password
-            }, {
-                withCredentials: true,
-            })
+            axios.post('http://localhost:8080/login', { email, password }, { withCredentials: true })
                 .then((response) => {
-                    goToHome();
+                    //로그인 하면 발행한 jwt를 헤더에 넣어줌
+                    const { accessToken } = response.data.result.jwt;
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+                    setCookie('loginCookie', response.data.result.jwt);
+                    navigate('/', {
+                        state: {
+                            id: response.data.result.id,
+                            name: response.data.result.name
+                        }
+                    })
                     console.log(response.data);// 이 repsonse.data가 swr의 data가 됨
+
+
 
 
                 })
                 .catch((error) => {
-                    console.log(error.response)
+                    console.log(error.response.data)
                 })
 
         }, [email, password]
@@ -45,9 +57,7 @@ const LogIn = () => {
 
     }
 
-    const goToHome = () => {
-        navigate("/")
-    }
+
 
     return (
         <div id="Log-InContainer">

@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import fetcher from '@utils/fetcher';
+import { useQuery } from 'react-query';
 import {
     EditorPic, RecommendArticle, RecommendTitle, RecommendDesc, RecommendWrapSlide
     , ListSlide, RecommendListSlideLi, RecommendArticleSubject, RecommendArticleDesc, EditorPicWrapSlide, EditorPicTitle
@@ -7,19 +9,38 @@ import {
     EditorPicLinkItemImg, EditorPicLinkItem
 } from "@Home/style";
 import logo1 from "@img/logo1.png"
+import { getCookie } from '@/utils/cookie';
+import axios from 'axios';
 
 const Home = () => {
-    const [login, setLogin] = useState('');
-    const navigate = useNavigate();
 
-    const location = useLocation();
-    const name = location.state.name;
+    const { isLoading, error, data } = useQuery("getUsers", () => {
+        return axios
+            .get("http://localhost:8080/user", {
+                withCredentials: true,
+                headers: {
+                    "X-ACCESS-TOKEN": getCookie("loginCookie")
+
+                }
+            })
+            .then((response) => {
+                return response.data;
+
+            })
+    });
+
+    console.log(data);
+
+
+
 
 
 
 
     return (
+
         <div id='HomeContainer' style={{ overflowX: 'hidden' }}>
+
             <img src={logo1} />
 
             <EditorPic>

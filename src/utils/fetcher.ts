@@ -1,10 +1,20 @@
 import axios from 'axios';
+import { getCookie } from '@/utils/cookie';
 
-const fetcher = (url: string) =>
+
+const fetcher = (url: string) => {
+
     axios
         .get(url, {
             withCredentials: true,
-        })
-        .then((response) => response.data);
+            headers: {
+                "X-ACCESS-TOKEN": getCookie("loginCookie")
 
+            }
+        })
+        .then((response) => {
+            console.log(response.data);
+
+        });
+}
 export default fetcher;
